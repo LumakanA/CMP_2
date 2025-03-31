@@ -1,4 +1,4 @@
-package com.example.cmp_2.presentation.ui.theme
+package com.example.cmp_2.presentation.theme
 
 import android.app.Activity
 import android.os.Build
