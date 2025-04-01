@@ -9,6 +9,9 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -33,6 +36,15 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+private val lightCS = ColorSystem(
+    text1 = Color(0xFF0032FF)
+)
+
+private val darkCS = ColorSystem(
+    text1 = Color(0xFFFF0000)
+)
+
+
 @Composable
 fun CMP_2Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -41,18 +53,18 @@ fun CMP_2Theme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> darkCS
+        else -> lightCS
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    CompositionLocalProvider(localColorSystem provides colorScheme) {
+        MaterialTheme(
+            typography = Typography,
+            content = content
+        )
+    }
+}
+
+val localColorSystem = staticCompositionLocalOf {
+    lightCS
 }

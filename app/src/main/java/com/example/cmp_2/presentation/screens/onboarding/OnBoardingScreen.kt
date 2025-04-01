@@ -1,6 +1,7 @@
 package com.example.cmp_2.presentation.screens.onboarding
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -29,6 +30,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.cmp_2.R
 import com.example.cmp_2.common.AppButton
+import com.example.cmp_2.presentation.navigation.ScreenRouts
 
 @Composable
 fun OnBoardingScreen(
@@ -49,8 +51,7 @@ fun OnBoardingScreen(
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(horizontal = 24.dp)
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
+                .fillMaxSize()
         ) {
 
             HorizontalPager(state = pagerState) { page ->
@@ -58,7 +59,7 @@ fun OnBoardingScreen(
                     modifier = Modifier.verticalScroll(rememberScrollState()),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Spacer(modifier = Modifier.height(40.dp))
+                    Spacer(modifier = Modifier.height(147.dp))
 
                     Image(
                         modifier = Modifier
@@ -112,12 +113,18 @@ fun OnBoardingScreen(
                             else -> {
                                 stringResource(R.string.choose_a_language)
                             }
+                        },
+                        onClick = {
+                            navController.navigate(ScreenRouts.LoginScreen.route)
                         }
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
+                        modifier = Modifier.clickable {
+                            navController.navigate(ScreenRouts.LoginScreen.route)
+                        },
                         text = "Skip onboarding",
                         fontFamily = FontFamily(Font(R.font.fredoka_regular)),
                         fontSize = 15.sp,
