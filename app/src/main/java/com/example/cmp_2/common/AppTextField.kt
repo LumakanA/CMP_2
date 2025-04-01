@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.example.cmp_2.R
 import com.example.cmp_2.presentation.theme.Opacity_Dark
 import com.example.cmp_2.presentation.theme.Opacity_Gray_Dark
+import com.example.cmp_2.presentation.theme.defaultTextStyle
 
 @Composable
 fun AppTextField(
@@ -53,6 +54,7 @@ fun AppTextField(
         ),
         placeholder = {
             Text(
+                style = defaultTextStyle.header,
                 text = hintText,
                 color = Opacity_Gray_Dark
             )
